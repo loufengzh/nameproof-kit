@@ -2,6 +2,20 @@
 
 从简短产品想法得到品牌候选名，再生成保留来源和未知项的初步核查报告。Python 3.10+，无运行时依赖。主文档和完整字段说明见 [English README](../README.md)。
 
+## 让 AI 智能体安装
+
+在项目中打开你的编程智能体，粘贴下面这段：
+
+```text
+请在当前项目中安装 https://github.com/loufengzh/nameproof-kit 。
+先阅读 README 和 docs/INSTALL.md，为我正在使用的智能体安装 nameproof
+技能并保留 Python CLI 仓库。只使用项目内文件，覆盖已有文件前先询问。
+运行离线冒烟测试，报告安装路径和结果。不要配置 API 密钥、MCP、
+Logo 服务或付费服务。
+```
+
+支持 Claude Code、Codex、Cursor、Antigravity 和 Grok Build（普通 Grok 聊天不等于本地工具）。需要 Git、Python 3.10+ 和终端/文件访问权限。见[各智能体的准确命令与无需 Node 的方案](INSTALL.md)。无需 pip 安装；技能和 CLI 仓库都要保留。已验证安装路径和离线 CLI，未认证所有应用内的自动发现。
+
 ## 开始使用
 
 在仓库根目录运行：

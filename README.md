@@ -8,7 +8,44 @@ A small, dependency-free Python toolkit and portable agent skill for people nami
 
 > **Evidence, not clearance.** No tool can guarantee a name is legally safe worldwide. RDAP tells you about registration records, not whether a registrar will sell you a domain. This project keeps those distinctions visible instead of producing a misleading green tick.
 
-## Quick start
+## Install with your AI agent
+
+**Easiest: open your project in your coding agent and paste this:**
+
+```text
+Set up https://github.com/loufengzh/nameproof-kit in this project.
+Read its README and docs/INSTALL.md, then install the nameproof skill
+for the agent I am using and keep the Python CLI checkout accessible.
+Use project-local files only; ask before replacing existing files.
+Run the offline smoke test and show the installed paths and result.
+Do not configure API keys, MCP, logo providers, or paid services.
+```
+
+Works with local **Claude Code, Codex, Cursor, Antigravity, and Grok Build**. Your agent needs filesystem/terminal access, Git and Python 3.10+. Ordinary Grok chat cannot install local files.
+
+**Prefer the terminal?** From your project's root, with Node.js/npm also installed:
+
+```sh
+git clone https://github.com/loufengzh/nameproof-kit.git .nameproof-kit
+npx --yes skills@1.7.1 add ./.nameproof-kit --skill nameproof --agent codex --yes
+cd .nameproof-kit
+python -m nameproof report --brief examples/brief.json --format markdown
+cd ..
+```
+
+Replace `codex` with `claude-code`, `cursor`, `antigravity`, or `grok`. These are **first-install commands**: stop if `.nameproof-kit` or a `nameproof` skill already exists; see [safe setup, every agent's command, and no-Node fallback](docs/INSTALL.md). Nothing is installed globally, and Python needs no package installation.
+
+Then open a new agent session in your project and ask:
+
+```text
+Use nameproof to name my product: [describe your idea].
+The CLI checkout is .nameproof-kit. Give me a meaningful shortlist,
+explain trade-offs, and separate checked evidence from unknowns.
+```
+
+The installer places the skill; the checkout supplies its executable. Installation/layout and offline CLI checks are tested, **not automatic discovery and execution inside every vendor's app**. Logo generation remains separately opt-in.
+
+## Python CLI quick start
 
 Python 3.10+; no runtime dependencies. From this checkout:
 
@@ -37,14 +74,7 @@ By default, commands are offline. `--live` makes public HTTPS IANA/RDAP queries,
 
 ## Use with your coding agent
 
-Copy the entire `skills/nameproof` folder into the appropriate project skill directory. Keep this CLI checkout accessible. Example for Codex:
-
-```sh
-mkdir -p YOUR_PROJECT/.agents/skills
-cp -R skills/nameproof YOUR_PROJECT/.agents/skills/
-```
-
-Ask: “Use nameproof to name a calm research-writing editor for English and Vietnamese speakers. Compare meaningful options, check US/EU/VN evidence, and show what remains unknown.”
+Use the [agent-first installation guide](docs/INSTALL.md) above; no MCP setup is needed for the normal naming workflow.
 
 The skill asks the host to generate and critique diverse ideas, then passes its shortlist into the deterministic tooling. It does not replace good creative judgment with a mechanical score. See [HARNESSES.md](docs/HARNESSES.md) for vendor paths and the exact verification boundary. These formats are documented, but real discovery/execution inside all five products has not been certified.
 

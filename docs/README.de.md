@@ -2,6 +2,21 @@
 
 Kurze Produktidee → begründete Namensvorschläge → vorläufiger Prüfbericht mit Quellen und sichtbaren Lücken. Python 3.10+, ohne Laufzeitabhängigkeiten. Vollständige Schemata: [English README](../README.md).
 
+## Mit dem KI-Agenten installieren
+
+Öffnen Sie das Projekt in Ihrem Coding-Agenten und fügen Sie Folgendes ein:
+
+```text
+Richte https://github.com/loufengzh/nameproof-kit in diesem Projekt ein.
+Lies README und docs/INSTALL.md. Installiere den nameproof-Skill für
+meinen Agenten und halte den Python-CLI-Checkout verfügbar. Verwende
+nur Projektdateien; frage vor dem Ersetzen vorhandener Dateien. Führe
+den Offline-Smoke-Test aus und zeige Pfade und Ergebnis. Keine
+API-Schlüssel, MCP-Konfiguration, Logo-Anbieter oder Bezahldienste.
+```
+
+Für Claude Code, Codex, Cursor, Antigravity und Grok Build (gewöhnlicher Grok Chat garantiert keine lokale Ausführung). Git, Python 3.10+ sowie Datei- und Terminalzugriff werden benötigt. [Genaue Befehle je Agent und Variante ohne Node](INSTALL.md). Keine pip-Installation nötig; Skill und CLI-Checkout behalten. Installation und Offline-CLI sind geprüft, die automatische Erkennung in allen Apps nicht.
+
 ## Schnellstart
 
 Im Stammverzeichnis des Repositorys:

@@ -2,6 +2,8 @@
 
 Documentation checked on 2026-10-07. This is a documented-format support matrix, **not an end-to-end certification** of every application/version. NameProof's Python CLI is the executable component. `SKILL.md` teaches the host agent when and how to use it; it does not install Python, supply a model, grant permissions, or make a chat app execute local commands.
 
+For copy-paste setup and exact project-local commands, start with [INSTALL.md](INSTALL.md).
+
 ## Minimal integration
 
 1. Make this checkout available in the harness workspace and run `python -m nameproof --help` from the checkout root.
