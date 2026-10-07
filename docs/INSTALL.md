@@ -37,7 +37,7 @@ npx --yes skills@1.7.1 add ./.nameproof-kit --skill nameproof --agent antigravit
 npx --yes skills@1.7.1 add ./.nameproof-kit --skill nameproof --agent grok --yes
 ```
 
-These use the published [Vercel skills CLI](https://github.com/vercel-labs/skills), pinned to the tested version. `npx --yes` permits npm to download that CLI; the final `--yes` accepts the project skill installation. There is no `--global` flag. The installer writes `.agents/skills/nameproof/SKILL.md` and `skills-lock.json`; Claude Code and Grok Build additionally get a project-local symlink in `.claude/skills/nameproof` or `.grok/skills/nameproof`. If symlinks are unavailable, use the manual-copy route below. It does not configure MCP or install the optional logo skill.
+These use the published [Vercel skills CLI](https://github.com/vercel-labs/skills), pinned to the tested version. `npx --yes` permits npm to download that CLI; the final `--yes` accepts the project skill installation. There is no `--global` flag. The local-source commands above copy the skill into the agent’s project directory shown below and write `skills-lock.json`. Installing directly from a remote source can instead use a shared `.agents/skills` copy with symlinks for Claude Code and Grok Build. It does not configure MCP or install the optional logo skill.
 
 ### No Node.js? Copy one folder instead
 
