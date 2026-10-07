@@ -1,0 +1,258 @@
+{
+  "US": {
+    "name": "United States",
+    "trademark_sources": [
+      {
+        "label": "USPTO Trademark Search",
+        "url": "https://www.uspto.gov/trademarks/search",
+        "access": "manual",
+        "notes": "Federal marks only. Search similar marks and related goods/services; state and common-law use need separate review. TSDR retrieves known cases, not comprehensive name search."
+      }
+    ],
+    "business_sources": [
+      {
+        "label": "SBA state registration directory",
+        "url": "https://www.sba.gov/counseling/launch-your-business/state-registration-lookup/",
+        "access": "manual",
+        "notes": "Choose the relevant state and local DBA registers; no single US company-name clearance register."
+      }
+    ],
+    "coverage": "manual-review-required",
+    "reviewed_on": "2026-10-07",
+    "cross_border_sources": [
+      {
+        "label": "WIPO Global Brand Database",
+        "url": "https://www.wipo.int/en/web/global-brand-database/index",
+        "access": "manual-only-no-automation",
+        "notes": "Automatic querying/search/download is expressly prohibited. Coverage varies by office; check national registers too."
+      }
+    ]
+  },
+  "EU": {
+    "name": "European Union",
+    "trademark_sources": [
+      {
+        "label": "EUIPO eSearch and TMview",
+        "url": "https://www.euipo.europa.eu/search-ip",
+        "access": "manual",
+        "notes": "Search EUTMs and participating national offices; inspect office coverage and update dates."
+      },
+      {
+        "label": "EUIPO Trademark Search API",
+        "url": "https://dev.euipo.europa.eu/product/trademark-search_100",
+        "access": "account-api",
+        "notes": "Official EUIPO REST API; subscription/sign-in and plan-specific rate limits. Not implemented in this toolkit."
+      }
+    ],
+    "business_sources": [
+      {
+        "label": "European e-Justice business registers",
+        "url": "https://e-justice.europa.eu/topics/registers-business-insolvency-land/business-registers-search-company-eu_en",
+        "access": "manual",
+        "notes": "BRIS interconnects national registers; company forms and data availability vary. This is not a single EU business-name reservation service."
+      }
+    ],
+    "coverage": "manual-review-required",
+    "reviewed_on": "2026-10-07",
+    "cross_border_sources": [
+      {
+        "label": "WIPO Global Brand Database",
+        "url": "https://www.wipo.int/en/web/global-brand-database/index",
+        "access": "manual-only-no-automation",
+        "notes": "Automatic querying/search/download is expressly prohibited. Coverage varies by office; check national registers too."
+      }
+    ]
+  },
+  "GB": {
+    "name": "United Kingdom",
+    "trademark_sources": [
+      {
+        "label": "UK IPO trademark search",
+        "url": "https://www.gov.uk/search-for-trademark",
+        "access": "manual",
+        "notes": "Search UK marks and international marks designating UK; separate Crown Dependency registers may apply."
+      }
+    ],
+    "business_sources": [
+      {
+        "label": "Companies House",
+        "url": "https://find-and-update.company-information.service.gov.uk/",
+        "access": "manual",
+        "notes": "Company register does not replace trademark or trading-name checks."
+      },
+      {
+        "label": "Companies House search API",
+        "url": "https://developer-specs.company-information.service.gov.uk/companies-house-public-data-api/reference/search/search-companies",
+        "access": "account-api",
+        "notes": "API key required; 600 requests per five minutes. Availability restrictions are documented. Not implemented here."
+      }
+    ],
+    "coverage": "manual-review-required",
+    "reviewed_on": "2026-10-07",
+    "cross_border_sources": [
+      {
+        "label": "WIPO Global Brand Database",
+        "url": "https://www.wipo.int/en/web/global-brand-database/index",
+        "access": "manual-only-no-automation",
+        "notes": "Automatic querying/search/download is expressly prohibited. Coverage varies by office; check national registers too."
+      }
+    ]
+  },
+  "VN": {
+    "name": "Viet Nam",
+    "trademark_sources": [
+      {
+        "label": "IP Viet Nam search guidance",
+        "url": "https://ipvietnam.gov.vn/",
+        "access": "manual",
+        "notes": "Use the official WIPO Publish trademark search linked by the office; search Vietnamese diacritics and variants. No authorized public search API verified."
+      },
+      {
+        "label": "WIPO Publish official user guide",
+        "url": "https://wipopublish.ipvietnam.gov.vn/wopublish-resources/documents/help.pdf",
+        "access": "manual",
+        "notes": "National published applications and records require verification of current coverage and lag."
+      }
+    ],
+    "business_sources": [
+      {
+        "label": "National Business Registration Portal",
+        "url": "https://dangkykinhdoanh.gov.vn/en/Pages/default.aspx",
+        "access": "manual",
+        "notes": "Search entity names and local-language variants. No authorized public search API verified."
+      }
+    ],
+    "coverage": "manual-review-required",
+    "reviewed_on": "2026-10-07",
+    "cross_border_sources": [
+      {
+        "label": "WIPO Global Brand Database",
+        "url": "https://www.wipo.int/en/web/global-brand-database/index",
+        "access": "manual-only-no-automation",
+        "notes": "Automatic querying/search/download is expressly prohibited. Coverage varies by office; check national registers too."
+      }
+    ]
+  },
+  "CN": {
+    "name": "China",
+    "trademark_sources": [
+      {
+        "label": "CNIPA Trademark services",
+        "url": "https://english.cnipa.gov.cn/col/col2950/index.html",
+        "access": "manual",
+        "notes": "Use official trademark search; check Chinese characters, pinyin and Latin variants. Respect login and challenge requirements."
+      },
+      {
+        "label": "CNIPA public service platform",
+        "url": "https://ggfw.cnipa.gov.cn/",
+        "access": "manual",
+        "notes": "Advertises trademark data opening, batch data and interfaces; authorization and redistribution terms must be verified before integration."
+      }
+    ],
+    "business_sources": [
+      {
+        "label": "National Enterprise Credit Information Publicity System",
+        "url": "https://www.gsxt.gov.cn/index.html",
+        "access": "manual",
+        "notes": "Official SAMR registry. Automated fetch returned 403 in research; do not bypass restrictions. No public API access verified."
+      }
+    ],
+    "coverage": "manual-review-required",
+    "reviewed_on": "2026-10-07",
+    "cross_border_sources": [
+      {
+        "label": "WIPO Global Brand Database",
+        "url": "https://www.wipo.int/en/web/global-brand-database/index",
+        "access": "manual-only-no-automation",
+        "notes": "Automatic querying/search/download is expressly prohibited. Coverage varies by office; check national registers too."
+      }
+    ]
+  },
+  "DE": {
+    "name": "Germany",
+    "trademark_sources": [
+      {
+        "label": "DPMAregister",
+        "url": "https://www.dpma.de/english/search/dpmaregister/",
+        "access": "manual",
+        "notes": "German marks plus EU and international marks protecting Germany. Register status updated daily; publication cadence differs. DPMAconnectPlus is the official bulk/interface route requiring separate onboarding."
+      }
+    ],
+    "business_sources": [
+      {
+        "label": "Joint Register Portal",
+        "url": "https://www.handelsregister.de/rp_web/",
+        "access": "manual",
+        "notes": "Search federal-state commercial and related registers; not a full inventory of every trading name. No public API access verified."
+      }
+    ],
+    "coverage": "manual-review-required",
+    "reviewed_on": "2026-10-07",
+    "cross_border_sources": [
+      {
+        "label": "WIPO Global Brand Database",
+        "url": "https://www.wipo.int/en/web/global-brand-database/index",
+        "access": "manual-only-no-automation",
+        "notes": "Automatic querying/search/download is expressly prohibited. Coverage varies by office; check national registers too."
+      }
+    ]
+  },
+  "RU": {
+    "name": "Russia",
+    "trademark_sources": [
+      {
+        "label": "Rospatent Search Platform",
+        "url": "https://searchplatform.rospatent.gov.ru/trademarks",
+        "access": "manual",
+        "notes": "Official platform includes registered Russian, well-known and internationally protected marks; verify pending-application coverage separately. Search Cyrillic and Latin variants. No public API access verified."
+      }
+    ],
+    "business_sources": [
+      {
+        "label": "Federal Tax Service EGRUL/EGRIP",
+        "url": "https://egrul.nalog.ru/",
+        "access": "manual",
+        "notes": "Search legal entity names in Cyrillic and relevant variants. No public API access verified."
+      }
+    ],
+    "coverage": "manual-review-required",
+    "reviewed_on": "2026-10-07",
+    "cross_border_sources": [
+      {
+        "label": "WIPO Global Brand Database",
+        "url": "https://www.wipo.int/en/web/global-brand-database/index",
+        "access": "manual-only-no-automation",
+        "notes": "Automatic querying/search/download is expressly prohibited. Coverage varies by office; check national registers too."
+      }
+    ]
+  },
+  "SG": {
+    "name": "Singapore",
+    "trademark_sources": [
+      {
+        "label": "IPOS Digital Hub",
+        "url": "https://digitalhub.ipos.gov.sg/FAMN/eservice/IP4SG/MN_AdvancedSearch",
+        "access": "manual",
+        "notes": "Use Similar Mark Search for similarity; basic search is prefix-oriented. Newly filed marks can be delayed. No public API access verified."
+      }
+    ],
+    "business_sources": [
+      {
+        "label": "ACRA Bizfile",
+        "url": "https://www.bizfile.gov.sg/",
+        "access": "manual",
+        "notes": "Search entity names/UEN. Name approval and trademark rights are separate. No public search API access verified."
+      }
+    ],
+    "coverage": "manual-review-required",
+    "reviewed_on": "2026-10-07",
+    "cross_border_sources": [
+      {
+        "label": "WIPO Global Brand Database",
+        "url": "https://www.wipo.int/en/web/global-brand-database/index",
+        "access": "manual-only-no-automation",
+        "notes": "Automatic querying/search/download is expressly prohibited. Coverage varies by office; check national registers too."
+      }
+    ]
+  }
+}

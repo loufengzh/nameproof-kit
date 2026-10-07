@@ -1,0 +1,11 @@
+{
+  "idea": "A calm collaborative writing editor for independent researchers",
+  "audience": "Researchers writing in English and Vietnamese",
+  "keywords": ["writing", "research", "clarity"],
+  "tone": "calm, credible, warm",
+  "countries": ["US", "EU", "VN"],
+  "nice_classes": [9, 42],
+  "tlds": ["com", "app"],
+  "max_length": 12,
+  "avoid": ["Auto"]
+}

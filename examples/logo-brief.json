@@ -1,0 +1,21 @@
+{
+  "name": "FolioTrail",
+  "idea": "A calm collaborative writing editor for independent researchers",
+  "audience": "Researchers writing in English and Vietnamese",
+  "tone": "calm, credible, warm",
+  "status": "brief_only_no_image_generated",
+  "upstream": "https://github.com/op7418/logo-generator-skill/tree/bf4e9ac4d4428bda261afcfe981871ceb92d94e6",
+  "prompt": "Create three original logo directions for FolioTrail. Product: A calm collaborative writing editor for independent researchers. Explore silhouette, typography and a monochrome variant. Do not imitate existing marks. Ask the user to select a direction before final rendering.",
+  "approval_required_before": [
+    "sending private inputs to an external image service",
+    "paid generation or API calls",
+    "executing unreviewed third-party scripts"
+  ],
+  "review": [
+    "small-size legibility",
+    "monochrome contrast",
+    "actual word spelling",
+    "visual trademark similarity",
+    "license and provenance"
+  ]
+}

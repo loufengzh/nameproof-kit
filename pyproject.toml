@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nameproof-kit"
+version = "0.1.0"
+description = "Evidence-aware brand naming, domain observations and trademark screening for coding agents"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+readme = "README.md"
+authors = [{name = "loufengzh"}]
+
+[project.scripts]
+nameproof = "nameproof.cli:main"
+
+[tool.setuptools]
+packages = ["nameproof"]
+
+[tool.setuptools.package-data]
+nameproof = ["jurisdictions.json"]
