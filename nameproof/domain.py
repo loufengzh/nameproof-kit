@@ -140,6 +140,10 @@ def apply_registrar_receipt(observation, receipt, now=None):
     except (ValueError, TypeError, AttributeError) as exc:
         raise ValueError('invalid receipt timestamp') from exc
     result = dict(observation)
+    # A replacement receipt also replaces its derived verdict. Rebuild from the
+    # registry observation so an expired quote cannot inherit old availability.
+    result['purchase_status'] = ('not_available_for_new_registration'
+                                 if observation['registration_status'] == 'registered' else 'unknown')
     result['registrar_receipt'] = {key: receipt[key] for key in required}
     result['receipt_verification'] = 'user_supplied_not_independently_authenticated'
     age = current - at

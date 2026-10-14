@@ -100,7 +100,7 @@ Start with [examples/brief.json](examples/brief.json). `idea` is required; other
 
 This is a **schema illustration, not an actual trademark record**. Importing a URL does not authenticate a record. No records means `unreviewed`; no match in a supplied subset means only `no-match-in-imported-records`. Different classes and inactive statuses are retained for review. EU rights are considered for DE and DE national rights for EU plans; other EU national systems remain a coverage gap.
 
-A domain receipt (`domain --receipt FILE`) requires `domain`, `registrar`, `status` (`available`, `unavailable`, `reserved`, `premium`), `source_url` (HTTPS) and timezone-aware `observed_at`. Receipts older than 15 minutes or more than 30 seconds in the future cannot update the purchase observation. Recent receipts remain explicitly **user-supplied, not independently authenticated**. Contradictory RDAP/registrar evidence is a conflict, not a successful check. Price/currency, renewal cost and purchase conditions are not inferred; consult the registrar directly.
+A domain receipt (`domain --receipt FILE`) requires `domain`, `registrar`, `status` (`available`, `unavailable`, `reserved`, `premium`), `source_url` (HTTPS) and timezone-aware `observed_at`. Receipts older than 15 minutes or more than 30 seconds in the future cannot establish a registrar purchase status. Applying a receipt replaces the previous receipt and its derived verdict, including when the same receipt is checked again. If it is stale or future-dated, the purchase status falls back to `not_available_for_new_registration` for a registered domain, otherwise `unknown`; an earlier registrar verdict or conflict is not retained. Recent receipts remain explicitly **user-supplied, not independently authenticated**. Contradictory RDAP/registrar evidence is a conflict, not a successful check. Price/currency, renewal cost and purchase conditions are not inferred; consult the registrar directly.
 
 ## Optional pinned logo instructions
 
@@ -124,3 +124,5 @@ Downloads and SHA-256 verifies three plain-text files from the pinned upstream r
 The suite covers CLI flows, MCP protocol handling, Unicode and malformed inputs, evidence conflicts, stale quotes, jurisdiction/class behavior, and failure-closed domain states. Tests mock network responses; live results are observations, not evergreen fixtures. CI runs Python 3.10–3.13 and verifies installed package data from outside the checkout.
 
 MIT license applies to this repository's original code. No external logo implementation is redistributed. Contributions should add an evidenced capability, tests, examples and consistent EN/zh-CN/ru/de documentation. Never replace an unknown status with an optimistic claim to improve a demo.
+
+Offline receipt-expiry example (synthetic evidence, no network): `python -m examples.receipt_refresh` from the checkout. See [the example](examples/receipt_refresh.py).
