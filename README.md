@@ -126,3 +126,9 @@ The suite covers CLI flows, MCP protocol handling, Unicode and malformed inputs,
 MIT license applies to this repository's original code. No external logo implementation is redistributed. Contributions should add an evidenced capability, tests, examples and consistent EN/zh-CN/ru/de documentation. Never replace an unknown status with an optimistic claim to improve a demo.
 
 Offline receipt-expiry example (synthetic evidence, no network): `python -m examples.receipt_refresh` from the checkout. See [the example](examples/receipt_refresh.py).
+
+### RDAP name consistency
+
+Every supplied `ldhName` and `unicodeName` must identify the queried domain; absent fields are allowed only when another name matches. Contradictory, empty, malformed or non-string name fields produce `unknown` with `rdap_domain_mismatch`. Case, one trailing root dot and NFC-equivalent Unicode spelling are accepted. Punycode spelling comparison preserves explicit ASCII queries such as `xn--fa-hia.com` paired with `faß.com`, without mapping it to `fass.com`. This is an evidence-consistency check, not full IDNA2008 validation; conservative Unicode query-input restrictions are unchanged. See [RFC 9083 domain objects](https://www.rfc-editor.org/rfc/rfc9083.html#section-5.3).
+
+Run the synthetic offline example with `python -m examples.rdap_name_consistency`. It demonstrates a contradictory response remaining unknown and a matching IDN pair being registered; it makes no live registration claim.

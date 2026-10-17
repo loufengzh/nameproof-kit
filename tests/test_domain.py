@@ -18,6 +18,44 @@ class DomainTests(unittest.TestCase):
     def test_registered(self):
         result = check_domain('example.com', True, self.response(200, {'objectClassName':'domain','ldhName':'EXAMPLE.COM'}))
         self.assertEqual(result['registration_status'], 'registered')
+    def test_all_supplied_rdap_names_must_match(self):
+        for fields in [
+            {'ldhName': 'example.com', 'unicodeName': 'other.com'},
+            {'ldhName': 'other.com', 'unicodeName': 'example.com'},
+            {},
+        ] + [{good: 'example.com', bad: value}
+             for good, bad in [('ldhName', 'unicodeName'), ('unicodeName', 'ldhName')]
+             for value in ['', None, False, 0, [], {}, ' example.com', 'example.com..', 'xn--example-.com',
+                           'example.xn--com-', 'xn--example-.xn--com-', 'xn--.com']]:
+            with self.subTest(fields=fields):
+                result = check_domain('example.com', True, self.response(200, {'objectClassName': 'domain', **fields}))
+                self.assertEqual(result['registration_status'], 'unknown')
+                self.assertEqual(result['purchase_status'], 'unknown')
+                self.assertEqual(result['reason'], 'rdap_domain_mismatch')
+
+    def test_rdap_equivalent_names(self):
+        for query, fields in [
+            ('example.com', {'ldhName': 'EXAMPLE.COM.', 'unicodeName': 'Example.Com'}),
+            ('example.com', {'unicodeName': 'EXAMPLE.COM.'}),
+            ('xn--bcher-kva.com', {'ldhName': 'XN--BCHER-KVA.COM', 'unicodeName': 'bu\u0308cher.com'}),
+            ('xn--bcher-kva.com', {'unicodeName': 'bücher.com'}),
+            ('xn--fa-hia.com', {'ldhName': 'xn--fa-hia.com', 'unicodeName': 'faß.com'}),
+            ('xn--fa-hia.com', {'unicodeName': 'faß.com'}),
+            ('xn--3xa.com', {'ldhName': 'xn--3xa.com', 'unicodeName': 'ς.com'}),
+            ('xn--bcher-kva.com', {'unicodeName': 'xn--bcher-kva.com'}),
+        ]:
+            with self.subTest(query=query, fields=fields):
+                result = check_domain(query, True, self.response(200, {'objectClassName': 'domain', **fields}))
+                self.assertEqual(result['registration_status'], 'registered')
+
+    def test_rdap_does_not_map_distinct_unicode_spellings(self):
+        for query, name in [('fass.com', 'faß.com'), ('xn--fa-hia.com', 'fass.com'),
+                            ('xn--3xa.com', 'σ.com'), ('xn--bcher-kva.com', 'bucher.com')]:
+            with self.subTest(query=query, name=name):
+                result = check_domain(query, True, self.response(200, {'objectClassName': 'domain', 'ldhName': query, 'unicodeName': name}))
+                self.assertEqual(result['registration_status'], 'unknown')
+                self.assertEqual(result['reason'], 'rdap_domain_mismatch')
+
     def test_no_record_not_available(self):
         result = check_domain('example.com', True, self.response(404, {'errorCode':404}))
         self.assertEqual(result['registration_status'],'no_record')

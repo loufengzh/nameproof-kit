@@ -83,6 +83,48 @@ def rdap_url(domain, bootstrap):
                     return base.rstrip('/') + '/domain/' + quote(domain, safe='')
     return None
 
+def _rdap_names_match(record, domain):
+    """Compare supplied identifiers, without claiming full IDNA2008 validation."""
+    def spelling(name):
+        if not isinstance(name, str) or not name or name != name.strip():
+            raise ValueError('invalid RDAP name')
+        # Remove one DNS root dot only; do not collapse empty labels.
+        labels = unicodedata.normalize('NFC', name.removesuffix('.')).lower().split('.')
+        if any(not label for label in labels):
+            raise ValueError('empty RDAP name label')
+        decoded = []
+        for label in labels:
+            if label.isascii() and not re.fullmatch(r'[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?', label):
+                raise ValueError('invalid RDAP ASCII label')
+            if label.startswith('xn--'):
+                value = label[4:].encode('ascii').decode('punycode')
+                if value.isascii() or value.encode('punycode').decode('ascii') != label[4:]:
+                    raise ValueError('invalid RDAP A-label')
+                decoded.append(value)
+            else:
+                decoded.append(label)
+        # Retain label boundaries, including for malformed decoded data.
+        return tuple(decoded)
+
+    fields = [key for key in ('ldhName', 'unicodeName') if key in record]
+    if not fields:
+        return False
+    try:
+        expected = spelling(domain)
+        for key in fields:
+            name = record[key]
+            if key == 'ldhName' and (not isinstance(name, str) or not name.isascii()
+                                     or normalize_domain(name) != domain):
+                return False
+            # Punycode decoding compares spelling without IDNA2003 mappings:
+            # an explicit xn--fa-hia query must remain distinct from "fass".
+            if spelling(name) != expected:
+                return False
+    except (ValueError, UnicodeError):
+        return False
+    return True
+
+
 def check_domain(value, live=False, fetch=fetch_json):
     domain = normalize_domain(value)
     out = {'domain': domain, 'registration_status': 'unknown', 'purchase_status': 'unknown', 'observed_at': None,
@@ -102,8 +144,7 @@ def check_domain(value, live=False, fetch=fetch_json):
         out['source_url'] = url
         code, record = fetch(url)
         if code == 200 and isinstance(record, dict) and record.get('objectClassName') == 'domain':
-            returned = record.get('ldhName') or record.get('unicodeName')
-            if returned and normalize_domain(returned) == domain:
+            if _rdap_names_match(record, domain):
                 out.update(registration_status='registered', purchase_status='not_available_for_new_registration', reason='rdap_domain_record')
             else:
                 out['reason'] = 'rdap_domain_mismatch'

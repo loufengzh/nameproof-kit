@@ -57,3 +57,9 @@ MIT gilt nur für den Originalcode dieses Repositorys. CI prüft Python 3.10–3
 `python -m nameproof logo-source --output /path/to/new-directory --fetch` lädt drei Textdateien der festgelegten Version und prüft SHA-256. Das Zielverzeichnis muss neu sein; keine Überschreibung, Skill-Installation oder Skriptausführung. `UPSTREAM_SKILL.md` und Designreferenzen ausdrücklich lesen und mit dem Agenten eigene SVG-Konzepte erstellen. Kostenpflichtige Bilder bleiben separat genehmigungspflichtig. Ohne `--fetch` wird nur das Manifest ausgegeben. Siehe [Beispiel](WALKTHROUGH.md).
 
 Offline-Beispiel zum Ablauf einer Auskunft (fiktive Belege, kein Netzwerk): im Repository-Stamm `python -m examples.receipt_refresh` ausführen. Siehe [Beispielcode](../examples/receipt_refresh.py).
+
+## Konsistenz der RDAP-Namen
+
+Jedes übermittelte Feld `ldhName` und `unicodeName` muss die abgefragte Domain bezeichnen; ein Feld darf nur fehlen, wenn ein anderes passendes Namensfeld vorhanden ist. Widersprüchliche, leere, fehlerhafte oder nicht als Zeichenfolge übermittelte Namen ergeben `unknown` mit `rdap_domain_mismatch`. Groß-/Kleinschreibung, ein abschließender Wurzelpunkt und NFC-äquivalente Unicode-Schreibweisen sind zulässig. Der Punycode-Schreibvergleich erhält das Paar aus der expliziten ASCII-Abfrage `xn--fa-hia.com` und `faß.com`, ohne es in `fass.com` umzuwandeln. Dies prüft die Konsistenz von Belegen, nicht vollständig IDNA2008; die konservativen Einschränkungen für Unicode-Abfragen bleiben bestehen. Quelle: [Domainobjekte in RFC 9083](https://www.rfc-editor.org/rfc/rfc9083.html#section-5.3).
+
+Im Repository-Stamm zeigt `python -m examples.rdap_name_consistency` ein fiktives Offline-Beispiel: Widersprüche bleiben unbekannt, ein übereinstimmendes IDN-Paar wird als registriert bewertet. Daraus folgt keine Aussage über eine aktuelle reale Registrierung.

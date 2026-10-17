@@ -56,3 +56,9 @@ MIT 许可只覆盖本仓库原创代码。CI 检查 Python 3.10–3.13；网络
 运行 `python -m nameproof logo-source --output /path/to/new-directory --fetch` 可下载固定版本的三个纯文本文件并校验 SHA-256。目录必须新建；不覆盖文件、不安装技能、不下载或执行脚本。读取 `UPSTREAM_SKILL.md` 和设计参考，由宿主创建原创 SVG 概念；收费展示图仍需另行授权。省略 `--fetch` 只输出清单。见 [完整示例](WALKTHROUGH.md)。
 
 收据过期离线示例（虚构证据，不访问网络）：在仓库根目录运行 `python -m examples.receipt_refresh`。见[示例代码](../examples/receipt_refresh.py)。
+
+## RDAP 名称一致性
+
+响应中提供的每个 `ldhName` 和 `unicodeName` 都必须指向查询域名；只有另一个名称匹配时才允许缺少字段。矛盾、空值、格式错误或非字符串名称返回 `unknown`，原因为 `rdap_domain_mismatch`。允许大小写差异、一个末尾根点和 NFC 等价的 Unicode 拼写。Punycode 拼写比较支持明确的 ASCII 查询 `xn--fa-hia.com` 与 `faß.com` 配对，不会将其映射为 `fass.com`。这只是证据一致性检查，并非完整 IDNA2008 验证；保守的 Unicode 查询输入限制不变。依据：[RFC 9083 域名对象](https://www.rfc-editor.org/rfc/rfc9083.html#section-5.3)。
+
+在仓库根目录运行 `python -m examples.rdap_name_consistency` 可查看虚构离线示例：矛盾响应保持未知，匹配的 IDN 名称对返回已注册；不代表任何实时注册状态。
