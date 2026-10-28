@@ -72,6 +72,9 @@ def main(argv=None):
     sub.add_parser('mcp', help='Run local JSON-RPC stdio server; no HTTP listener')
     args = parser.parse_args(argv)
     try:
+        for option in ('candidates', 'records', 'receipt'):
+            if getattr(args, option, None) == '':
+                raise ValueError('--' + option + ' must not be an empty path')
         if args.command == 'mcp':
             from .mcp import serve
             return serve()

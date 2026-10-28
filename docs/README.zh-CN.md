@@ -62,3 +62,5 @@ MIT 许可只覆盖本仓库原创代码。CI 检查 Python 3.10–3.13；网络
 响应中提供的每个 `ldhName` 和 `unicodeName` 都必须指向查询域名；只有另一个名称匹配时才允许缺少字段。矛盾、空值、格式错误或非字符串名称返回 `unknown`，原因为 `rdap_domain_mismatch`。允许大小写差异、一个末尾根点和 NFC 等价的 Unicode 拼写。Punycode 拼写比较支持明确的 ASCII 查询 `xn--fa-hia.com` 与 `faß.com` 配对，不会将其映射为 `fass.com`。这只是证据一致性检查，并非完整 IDNA2008 验证；保守的 Unicode 查询输入限制不变。依据：[RFC 9083 域名对象](https://www.rfc-editor.org/rfc/rfc9083.html#section-5.3)。
 
 在仓库根目录运行 `python -m examples.rdap_name_consistency` 可查看虚构离线示例：矛盾响应保持未知，匹配的 IDN 名称对返回已注册；不代表任何实时注册状态。
+
+可选输入文件参数 `--candidates`、`--records` 和 `--receipt` 可以省略；一旦提供，路径就不能为空。`--records ""`、`--records=` 以及其他参数的等价形式会返回输入错误 2，不生成报告，也不发出实时请求。空格按字面路径保留，不会静默忽略证据文件。
